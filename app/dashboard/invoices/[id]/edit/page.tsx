@@ -2,8 +2,9 @@ import Form from '@/app/ui/invoices/edit-form';
 import Breadcrumbs from '@/app/ui/invoices/breadcrumbs';
 import { fetchInvoiceById, fetchCustomers } from '@/app/lib/data';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 import { Metadata } from 'next';
- 
+
 export const metadata: Metadata = {
   title: 'Edit Invoice',
 };
@@ -32,7 +33,9 @@ export default async function Page(props: { params: Promise<{ id: string }> }) {
           },
         ]}
       />
-      <Form invoice={invoice} customers={customers} />
+      <Suspense>
+        <Form invoice={invoice} customers={customers} />
+      </Suspense>
     </main>
   );
 }
